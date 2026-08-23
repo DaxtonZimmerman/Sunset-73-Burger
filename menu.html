@@ -9,17 +9,20 @@
 </head>
 
 <body>
-    <header>
-        <a href="index.html"><img src="images/sunset-73-logo.png" class="logo" alt="Sunset 73 Burger"></a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-        <nav>
+    <header>
+        <a href="index.html" aria-label="Sunset 73 Burger home"><img src="images/sunset-73-logo.png" class="logo"
+                alt="Sunset 73 Burger logo"></a>
+
+        <nav aria-label="Main navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="menu.html">Menu</a></li>
+                <li><a href="menu.html" aria-current="page">Menu</a></li>
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="main-content" tabindex="-1">
         <section class="menu-intro">
             <h1>The Sunset 73 Menu</h1>
             <p>Big flavor, crispy edges, and diner favorites made for the good times.</p>
