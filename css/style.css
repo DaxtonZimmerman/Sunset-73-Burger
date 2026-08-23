@@ -205,6 +205,13 @@ footer p {
     border-radius: 1rem;
     box-shadow: 6px 6px 0 var(--orange);
 }
+.menu-item-image {
+    width: 100%;
+    height: auto;
+    border: 4px solid var(--brown);
+    border-radius: 0.75rem;
+    margin-bottom: 1.25rem;
+}
 .price {
     font-weight: bold;
     color: var(--brown);
