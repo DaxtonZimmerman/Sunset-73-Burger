@@ -281,6 +281,253 @@ footer p {
     outline-offset: 2px;
     box-shadow: 0 0 0 5px var(--brown);
 }
+.view-details {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--cream);
+    color: var(--brown);
+    border: 3px solid var(--brown);
+    border-radius: 0.5rem;
+    font: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.view-details:hover {
+    background-color: var(--orange);
+    color: var(--cream);
+}
+.view-details:focus-visible {
+    outline: 3px solid var(--cream);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--brown);
+}
+.product-dialog {
+    width: min(900px, calc(100% - 2rem));
+    max-height: calc(100vh - 2rem);
+    padding: 0;
+    overflow: auto;
+    background-color: var(--cream);
+    color: var(--brown);
+    border: 5px solid var(--brown);
+    border-radius: 1rem;
+    box-shadow: 10px 10px 0 var(--orange);
+}
+.product-dialog::backdrop {
+    background-color: rgba(56, 37, 27, 0.75);
+}
+.product-dialog-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    align-items: start;
+}
+.product-dialog-image {
+    display: block;
+    width: calc(100% - 3rem);
+    height: auto;
+    margin: 1.5rem;
+    border: 5px solid var(--brown);
+    border-radius: 0.75rem;
+}
+.product-dialog-content {
+    padding: 3rem 2rem 2rem;
+}
+.product-dialog-kicker {
+    color: var(--orange);
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.product-dialog-content h2 {
+    color: var(--orange);
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+}
+.product-dialog-content h3 {
+    margin: 1.5rem 0 0.5rem;
+}
+.product-dialog-ingredients {
+    color: var(--green);
+    font-weight: bold;
+    line-height: 1.7;
+}
+.product-dialog-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.product-dialog-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background-color: var(--brown);
+    color: var(--cream);
+    border: 3px solid var(--cream);
+    border-radius: 50%;
+    font: inherit;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.product-dialog-close:hover {
+    background-color: var(--orange);
+}
+.product-dialog-close:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+}
+.product-dialog-add {
+    margin-top: 1.5rem;
+}
+.product-customization {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background-color: #fff8e5;
+    border: 3px solid var(--brown);
+    border-radius: 0.75rem;
+}
+.product-customization legend {
+    padding: 0 0.5rem;
+    color: var(--orange);
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.product-customization p {
+    margin-top: 0;
+}
+.product-customization h4 {
+    margin: 1rem 0 0.5rem;
+}
+.customization-options {
+    display: grid;
+    gap: 0.5rem;
+}
+.customization-options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.customization-options input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.15rem;
+    accent-color: var(--green);
+}
+.sauce-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: bold;
+}
+#product-sauce {
+    width: 100%;
+    padding: 0.65rem;
+    background-color: var(--cream);
+    color: var(--brown);
+    border: 3px solid var(--brown);
+    border-radius: 0.5rem;
+    font: inherit;
+}
+#product-sauce:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+}
+.product-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+.product-quantity span {
+    margin-right: auto;
+    font-weight: bold;
+}
+.product-quantity output {
+    min-width: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+.product-quantity button {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background-color: var(--cream);
+    color: var(--brown);
+    border: 3px solid var(--brown);
+    border-radius: 50%;
+    font: inherit;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.product-quantity button:hover {
+    background-color: var(--green);
+    color: var(--cream);
+}
+.product-quantity button:focus-visible {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+}
+.cart-item-customizations {
+    color: var(--green);
+    font-size: 0.95rem !important;
+    font-weight: bold;
+}
+.receipt-customizations {
+    display: block;
+    margin-top: 0.25rem;
+    color: #725f50;
+    font-size: 0.85rem;
+}
+.cart-fly-image {
+    position: fixed;
+    z-index: 1000;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    pointer-events: none;
+    border: 4px solid var(--cream);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(56, 37, 27, 0.35);
+    opacity: 1;
+    transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.65s ease;
+}
+.cart-count-pop {
+    display: inline-block;
+    animation: cart-count-pop 0.4s ease;
+}
+.cart-toast {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 1001;
+    max-width: calc(100% - 3rem);
+    margin: 0;
+    padding: 1rem 1.25rem;
+    background-color: var(--green);
+    color: var(--cream);
+    border: 4px solid var(--brown);
+    border-radius: 0.75rem;
+    box-shadow: 5px 5px 0 var(--orange);
+    font-weight: bold;
+    transform: translateY(150%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.cart-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+@keyframes cart-count-pop {
+    50% {
+        color: var(--mustard);
+        transform: scale(1.75) rotate(-8deg);
+    }
+}
 
 /* Order Page Styles */
 .order-section {
@@ -790,6 +1037,15 @@ footer p {
     .order-progress li.current::before {
         animation: none;
     }
+    .cart-fly-image {
+        display: none;
+    }
+    .cart-count-pop {
+        animation: none;
+    }
+    .cart-toast {
+        transition: none;
+    }
 }
 @media (max-width: 768px) {
     header {
@@ -814,6 +1070,16 @@ footer p {
     }
     .card-grid, .menu-grid {
         grid-template-columns: 1fr;
+    }
+    .product-dialog-layout {
+        grid-template-columns: 1fr;
+    }
+    .product-dialog-image {
+        width: calc(100% - 2rem);
+        margin: 1rem;
+    }
+    .product-dialog-content {
+        padding: 2rem 1.25rem 1.5rem;
     }
     .cart-item {
         flex-direction: column;
