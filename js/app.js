@@ -36,7 +36,11 @@ const menuImages = {
     "Strawberry Sunset": "images/strawberry-sunset.png",
     "Route 73 Double": "images/route-73-double.jpg",
     "Jukebox Jalapeño Burger": "images/jukebox-jalapeno.jpg",
-    "Highway Patty Melt": "images/highway-patty-melt.jpg"
+    "Highway Patty Melt": "images/highway-patty-melt.jpg",
+    "Hot Rod Chicken": "images/hot-rod-chicken.jpg",
+    "Crispy Chicken Club": "images/crispy-chicken-club.jpg",
+    "Deluxe Grilled Cheese": "images/deluxe-grilled-cheese.jpg",
+    "Classic Diner Dog": "images/classic-diner-dog.jpg"
 };
 
 function updateCartCount() {
