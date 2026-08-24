@@ -844,6 +844,64 @@ footer p {
 .confirmation-header {
     text-align: center;
 }
+.order-received-stamp {
+    display: inline-block;
+    margin: 0 0 1rem;
+    padding: 0.5rem 0.8rem;
+    color: var(--orange);
+    border: 5px double var(--orange);
+    border-radius: 0.35rem;
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: rotate(-6deg) scale(0);
+}
+#confirmation-content.celebrate .order-received-stamp {
+    animation: order-stamp-in 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) 0.15s forwards;
+}
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    overflow: hidden;
+    pointer-events: none;
+}
+.confetti-piece {
+    position: absolute;
+    top: -1.5rem;
+    width: 0.7rem;
+    height: 1.1rem;
+    border: 2px solid var(--brown);
+    opacity: 0;
+    animation-name: confetti-fall;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+@keyframes order-stamp-in {
+    0% {
+        opacity: 0;
+        transform: rotate(-6deg) scale(2.2);
+    }
+    70% {
+        opacity: 1;
+        transform: rotate(-6deg) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(-6deg) scale(1);
+    }
+}
+@keyframes confetti-fall {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, -2rem, 0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--confetti-drift), 105vh, 0) rotate(720deg);
+    }
+}
 .confirmation-kicker {
     margin-bottom: 0.25rem;
     color: var(--green);
@@ -1024,6 +1082,11 @@ footer p {
 #print-receipt:hover {
     background-color: var(--brown);
 }
+#print-receipt:focus-visible {
+    outline: 3px solid var(--cream);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--brown);
+}
 @media (prefers-reduced-motion: reduce) {
     .cart-item.removing {
         animation: none;
@@ -1036,6 +1099,14 @@ footer p {
     }
     .order-progress li.current::before {
         animation: none;
+    }
+    #confirmation-content.celebrate .order-received-stamp {
+        animation: none;
+        opacity: 1;
+        transform: rotate(-6deg) scale(1);
+    }
+    .confetti-piece {
+        display: none;
     }
     .cart-fly-image {
         display: none;

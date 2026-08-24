@@ -21,6 +21,7 @@ const estimatedItems = document.querySelector("#estimated-items");
 const checkoutForm = document.querySelector("#checkout-form");
 const confirmationContent = document.querySelector("#confirmation-content");
 const missingConfirmation = document.querySelector("#missing-confirmation");
+const confettiContainer = document.querySelector("#confetti-container");
 const printReceiptButton = document.querySelector("#print-receipt");
 const productDialog = document.querySelector("#product-dialog");
 const productDialogClose = document.querySelector("#product-dialog-close");
@@ -827,6 +828,34 @@ function updateOrderStatus(savedOrder) {
     }
 }
 
+function launchOrderCelebration() {
+    confirmationContent.classList.add("celebrate");
+
+    if (prefersReducedMotion.matches || confettiContainer === null) {
+        return;
+    }
+
+    const confettiColors = ["#b84927", "#e2a72e", "#617438", "#fff1cf"];
+    confettiContainer.textContent = "";
+
+    for (let index = 0; index < 36; index += 1) {
+        const confettiPiece = document.createElement("span");
+        const drift = Math.round(Math.random() * 240 - 120);
+
+        confettiPiece.classList.add("confetti-piece");
+        confettiPiece.style.left = `${Math.random() * 100}%`;
+        confettiPiece.style.backgroundColor = confettiColors[index % confettiColors.length];
+        confettiPiece.style.animationDelay = `${Math.random() * 0.45}s`;
+        confettiPiece.style.animationDuration = `${1.8 + Math.random() * 0.8}s`;
+        confettiPiece.style.setProperty("--confetti-drift", `${drift}px`);
+        confettiContainer.appendChild(confettiPiece);
+    }
+
+    window.setTimeout(function () {
+        confettiContainer.textContent = "";
+    }, 3200);
+}
+
 function displayOrderConfirmation() {
     if (confirmationContent === null) {
         return;
@@ -851,6 +880,7 @@ function displayOrderConfirmation() {
     const instructionsBox = document.querySelector("#confirmation-instructions");
 
     confirmationContent.hidden = false;
+    launchOrderCelebration();
     document.querySelector("#customer-thanks").textContent = `Thanks, ${savedOrder.customerName}!`;
     document.querySelector("#confirmation-number").textContent = savedOrder.orderNumber;
     document.querySelector("#confirmation-pickup").textContent = `${time.format(new Date(savedOrder.pickupStart))}–${time.format(new Date(savedOrder.pickupEnd))}`;

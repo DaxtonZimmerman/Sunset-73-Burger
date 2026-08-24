@@ -19,7 +19,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="order.html">Order (<span class="cart-count">0</span>)</a></li>
+                <li><a href="order.html" aria-current="page">Order (<span class="cart-count">0</span>)</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -39,7 +39,9 @@
             </div>
 
             <div id="confirmation-content" hidden>
+                <div class="confetti-container" id="confetti-container" aria-hidden="true"></div>
                 <div class="confirmation-header">
+                    <p class="order-received-stamp" aria-hidden="true">Order Received!</p>
                     <p class="confirmation-kicker">Order confirmed</p>
                     <h2 id="customer-thanks">Thanks!</h2>
                     <p>Order <strong id="confirmation-number"></strong></p>
