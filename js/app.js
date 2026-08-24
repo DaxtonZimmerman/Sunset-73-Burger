@@ -40,7 +40,10 @@ const menuImages = {
     "Hot Rod Chicken": "images/hot-rod-chicken.jpg",
     "Crispy Chicken Club": "images/crispy-chicken-club.jpg",
     "Deluxe Grilled Cheese": "images/deluxe-grilled-cheese.jpg",
-    "Classic Diner Dog": "images/classic-diner-dog.jpg"
+    "Classic Diner Dog": "images/classic-diner-dog.jpg",
+    "Loaded Disco Fries": "images/loaded-disco-fries.jpg",
+    "Mac & Cheese Bites": "images/mac-cheese-bites.jpg",
+    "Roller Rink Tots": "images/roller-rink-tots.jpg"
 };
 
 function updateCartCount() {
