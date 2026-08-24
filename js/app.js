@@ -33,7 +33,10 @@ const menuImages = {
     "Fried Pickle Chips": "images/fried-pickle-chips.png",
     "Golden Shake": "images/golden-shake.png",
     "Chocolate Boogie": "images/chocolate-boogie.png",
-    "Strawberry Sunset": "images/strawberry-sunset.png"
+    "Strawberry Sunset": "images/strawberry-sunset.png",
+    "Route 73 Double": "images/route-73-double.jpg",
+    "Jukebox Jalapeño Burger": "images/jukebox-jalapeno.jpg",
+    "Highway Patty Melt": "images/highway-patty-melt.jpg"
 };
 
 function updateCartCount() {
