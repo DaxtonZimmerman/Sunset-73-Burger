@@ -644,6 +644,16 @@ footer p {
     border-bottom: 4px solid var(--mustard);
     padding-bottom: 0.5rem;
 }
+.status-message {
+    padding: 0.75rem 1rem;
+    background-color: var(--mustard);
+    border-left: 5px solid var(--orange);
+    font-weight: bold;
+}
+.status-card.ready {
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px var(--cream), 0 0 0 8px var(--green);
+}
 .order-progress {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -689,12 +699,38 @@ footer p {
 .order-progress li.current::before {
     background-color: var(--orange);
     border-color: var(--brown);
+    animation: status-pulse 1.2s ease-in-out infinite;
+}
+.order-progress li.complete {
+    color: var(--brown);
+}
+.order-progress li.complete::before {
+    background-color: var(--green);
+    border-color: var(--brown);
+}
+.order-progress li.complete::after, .order-progress li.current::after {
+    background-color: var(--green);
 }
 .order-progress strong, .order-progress span {
     display: block;
 }
 .order-progress span {
     font-size: 0.9rem;
+}
+.status-note {
+    margin: 1.5rem 0 0;
+    color: #725f50;
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+}
+@keyframes status-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(184, 73, 39, 0.45);
+    }
+    50% {
+        box-shadow: 0 0 0 0.6rem rgba(184, 73, 39, 0);
+    }
 }
 .receipt-row, .receipt-totals p {
     display: flex;
@@ -750,6 +786,9 @@ footer p {
     }
     button:active, .button:active {
         transform: none;
+    }
+    .order-progress li.current::before {
+        animation: none;
     }
 }
 @media (max-width: 768px) {

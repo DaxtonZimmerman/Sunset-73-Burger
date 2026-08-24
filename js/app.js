@@ -204,6 +204,62 @@ function getOrderItemCount() {
     return itemCount;
 }
 
+function updateOrderStatus(savedOrder) {
+    const statusSteps = document.querySelectorAll(".order-progress li");
+
+    if (statusSteps.length === 0) {
+        return;
+    }
+
+    const placedTime = new Date(savedOrder.placedAt).getTime();
+    const cookingTime = savedOrder.cookingAt ? new Date(savedOrder.cookingAt).getTime() : placedTime + 3 * 60000;
+    const readyTime = savedOrder.readyAt ? new Date(savedOrder.readyAt).getTime() : new Date(savedOrder.pickupStart).getTime();
+    const currentTime = Date.now();
+    const statusMessage = document.querySelector("#status-message");
+    const statusCard = document.querySelector(".status-card");
+    let currentStep = 0;
+    let nextUpdateTime = cookingTime;
+
+    if (currentTime >= cookingTime) {
+        currentStep = 1;
+        nextUpdateTime = readyTime;
+    }
+
+    if (currentTime >= readyTime) {
+        currentStep = 2;
+        nextUpdateTime = null;
+    }
+
+    const messages = [
+        "We received your order and sent it to the kitchen.",
+        "Your burgers are sizzling on the griddle!",
+        "Your order is ready for pickup!"
+    ];
+
+    statusSteps.forEach(function (step, index) {
+        step.classList.remove("complete", "current");
+        step.removeAttribute("aria-current");
+
+        if (index < currentStep) {
+            step.classList.add("complete");
+        }
+
+        if (index === currentStep) {
+            step.classList.add("current");
+            step.setAttribute("aria-current", "step");
+        }
+    });
+
+    statusMessage.textContent = messages[currentStep];
+    statusCard.classList.toggle("ready", currentStep === 2);
+
+    if (nextUpdateTime !== null) {
+        setTimeout(function () {
+            updateOrderStatus(savedOrder);
+        }, Math.max(0, nextUpdateTime - currentTime));
+    }
+}
+
 function displayOrderConfirmation() {
     if (confirmationContent === null) {
         return;
@@ -253,6 +309,8 @@ function displayOrderConfirmation() {
         instructionsBox.hidden = false;
         document.querySelector("#confirmation-instructions-text").textContent = savedOrder.instructions;
     }
+
+    updateOrderStatus(savedOrder);
 }
 
 updateCartCount();
@@ -329,6 +387,7 @@ if (checkoutForm !== null) {
         const placedAt = new Date();
         const minimumMinutes = 20 + Math.max(0, itemCount - 1) * 2;
         const maximumMinutes = minimumMinutes + 10;
+        const cookingDelayMinutes = Math.min(5, Math.max(2, Math.round(minimumMinutes * 0.15)));
         const order = {
             orderNumber: `S73-${String(Date.now()).slice(-6)}`,
             customerName: document.querySelector("#pickup-name").value.trim(),
@@ -340,6 +399,8 @@ if (checkoutForm !== null) {
             tax: subtotal * taxRate,
             total: subtotal + subtotal * taxRate,
             placedAt: placedAt.toISOString(),
+            cookingAt: new Date(placedAt.getTime() + cookingDelayMinutes * 60000).toISOString(),
+            readyAt: new Date(placedAt.getTime() + minimumMinutes * 60000).toISOString(),
             pickupStart: new Date(placedAt.getTime() + minimumMinutes * 60000).toISOString(),
             pickupEnd: new Date(placedAt.getTime() + maximumMinutes * 60000).toISOString()
         };
