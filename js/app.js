@@ -16,6 +16,10 @@ const contactStatus = document.querySelector("#contact-status");
 const contactSubmitButton = document.querySelector(".contact-submit");
 const requestType = document.querySelector("#request-type");
 const estimatedItems = document.querySelector("#estimated-items");
+const checkoutForm = document.querySelector("#checkout-form");
+const confirmationContent = document.querySelector("#confirmation-content");
+const missingConfirmation = document.querySelector("#missing-confirmation");
+const printReceiptButton = document.querySelector("#print-receipt");
 const taxRate = 0.08;
 const maximumOnlineItems = 30;
 const contactFormUrl = "https://script.google.com/macros/s/AKfycbwMGtCymZB9yTae2guQKCMkbVYCydL0Zt5Y8iWnoJ3uyguSkQrP2kJvlADUSWlFE_0g6A/exec";
@@ -190,10 +194,72 @@ function displayCartItems() {
     });
 }
 
+function getOrderItemCount() {
+    let itemCount = 0;
+
+    cart.forEach(function (item) {
+        itemCount += item.quantity;
+    });
+
+    return itemCount;
+}
+
+function displayOrderConfirmation() {
+    if (confirmationContent === null) {
+        return;
+    }
+
+    const savedOrder = JSON.parse(localStorage.getItem("sunset73LastOrder"));
+
+    if (savedOrder === null) {
+        missingConfirmation.hidden = false;
+        return;
+    }
+
+    const money = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
+    });
+    const time = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit"
+    });
+    const confirmationItems = document.querySelector("#confirmation-items");
+    const instructionsBox = document.querySelector("#confirmation-instructions");
+
+    confirmationContent.hidden = false;
+    document.querySelector("#customer-thanks").textContent = `Thanks, ${savedOrder.customerName}!`;
+    document.querySelector("#confirmation-number").textContent = savedOrder.orderNumber;
+    document.querySelector("#confirmation-pickup").textContent = `${time.format(new Date(savedOrder.pickupStart))}–${time.format(new Date(savedOrder.pickupEnd))}`;
+    document.querySelector("#order-received-time").textContent = time.format(new Date(savedOrder.placedAt));
+    document.querySelector("#confirmation-subtotal").textContent = money.format(savedOrder.subtotal);
+    document.querySelector("#confirmation-tax").textContent = money.format(savedOrder.tax);
+    document.querySelector("#confirmation-total").textContent = money.format(savedOrder.total);
+
+    savedOrder.items.forEach(function (item) {
+        const receiptRow = document.createElement("p");
+        const itemDescription = document.createElement("span");
+        const itemTotal = document.createElement("strong");
+
+        receiptRow.classList.add("receipt-row");
+        itemDescription.textContent = `${item.quantity} × ${item.name}`;
+        itemTotal.textContent = money.format(item.price * item.quantity);
+        receiptRow.appendChild(itemDescription);
+        receiptRow.appendChild(itemTotal);
+        confirmationItems.appendChild(receiptRow);
+    });
+
+    if (savedOrder.instructions !== "") {
+        instructionsBox.hidden = false;
+        document.querySelector("#confirmation-instructions-text").textContent = savedOrder.instructions;
+    }
+}
+
 updateCartCount();
 displayCartItems();
 updateOrderTotals();
 updatePickupEstimate();
+displayOrderConfirmation();
 
 filterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -242,6 +308,52 @@ if (clearOrderButton !== null) {
     clearOrderButton.addEventListener("click", function () {
         cart.length = 0;
         saveCart();
+    });
+}
+
+if (checkoutForm !== null) {
+    checkoutForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const itemCount = getOrderItemCount();
+
+        if (itemCount === 0 || itemCount > maximumOnlineItems) {
+            return;
+        }
+
+        let subtotal = 0;
+
+        cart.forEach(function (item) {
+            subtotal += item.price * item.quantity;
+        });
+
+        const placedAt = new Date();
+        const minimumMinutes = 20 + Math.max(0, itemCount - 1) * 2;
+        const maximumMinutes = minimumMinutes + 10;
+        const order = {
+            orderNumber: `S73-${String(Date.now()).slice(-6)}`,
+            customerName: document.querySelector("#pickup-name").value.trim(),
+            instructions: document.querySelector("#special-instructions").value.trim(),
+            items: cart.map(function (item) {
+                return { ...item };
+            }),
+            subtotal: subtotal,
+            tax: subtotal * taxRate,
+            total: subtotal + subtotal * taxRate,
+            placedAt: placedAt.toISOString(),
+            pickupStart: new Date(placedAt.getTime() + minimumMinutes * 60000).toISOString(),
+            pickupEnd: new Date(placedAt.getTime() + maximumMinutes * 60000).toISOString()
+        };
+
+        localStorage.setItem("sunset73LastOrder", JSON.stringify(order));
+        cart.length = 0;
+        localStorage.setItem("sunset73Cart", JSON.stringify(cart));
+        window.location.href = "confirmation.html";
+    });
+}
+
+if (printReceiptButton !== null) {
+    printReceiptButton.addEventListener("click", function () {
+        window.print();
     });
 }
 

@@ -580,6 +580,167 @@ footer p {
     gap: 0.75rem;
     margin-top: 1.5rem;
 }
+
+/* Order Confirmation Styles */
+.confirmation-section {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 3rem 5% 4rem;
+}
+.confirmation-message, #confirmation-content {
+    padding: 2rem;
+    background-color: var(--mustard);
+    border: 4px solid var(--brown);
+    border-radius: 1rem;
+    box-shadow: 8px 8px 0 var(--orange);
+}
+.confirmation-header {
+    text-align: center;
+}
+.confirmation-kicker {
+    margin-bottom: 0.25rem;
+    color: var(--green);
+    font-weight: bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.confirmation-header h2 {
+    margin-bottom: 0.25rem;
+    color: var(--orange);
+    font-size: 2.25rem;
+}
+.confirmation-header p:last-child {
+    margin-top: 0;
+}
+.pickup-window {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background-color: var(--green);
+    color: var(--cream);
+    border: 4px solid var(--brown);
+    border-radius: 0.75rem;
+    text-align: center;
+}
+.pickup-window p, .pickup-window span {
+    display: block;
+    margin: 0;
+}
+.pickup-window strong {
+    display: block;
+    margin: 0.15rem 0;
+    color: var(--cream);
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 2rem;
+}
+.status-card, .receipt {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--cream);
+    border: 4px solid var(--brown);
+    border-radius: 0.75rem;
+}
+.status-card h3, .receipt h3 {
+    color: var(--orange);
+    border-bottom: 4px solid var(--mustard);
+    padding-bottom: 0.5rem;
+}
+.order-progress {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.order-progress li {
+    position: relative;
+    padding: 2.5rem 0.5rem 0;
+    color: #725f50;
+    text-align: center;
+}
+.order-progress li::before {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    left: 50%;
+    z-index: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: var(--cream);
+    border: 4px solid #8a7768;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+.order-progress li::after {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    right: 50%;
+    width: 100%;
+    height: 4px;
+    background-color: #8a7768;
+}
+.order-progress li:first-child::after {
+    display: none;
+}
+.order-progress li.current {
+    color: var(--brown);
+}
+.order-progress li.current::before {
+    background-color: var(--orange);
+    border-color: var(--brown);
+}
+.order-progress strong, .order-progress span {
+    display: block;
+}
+.order-progress span {
+    font-size: 0.9rem;
+}
+.receipt-row, .receipt-totals p {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.receipt-row {
+    padding-bottom: 0.75rem;
+    border-bottom: 2px dashed #aa927e;
+}
+.receipt-totals {
+    margin-top: 1.5rem;
+}
+.receipt-total {
+    padding-top: 0.75rem;
+    border-top: 4px solid var(--brown);
+    font-size: 1.25rem;
+}
+.receipt-instructions {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--mustard);
+    border-left: 5px solid var(--orange);
+}
+.receipt-instructions h4, .receipt-instructions p {
+    margin: 0;
+}
+.confirmation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+#print-receipt {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--orange);
+    color: var(--cream);
+    border: 5px solid var(--brown);
+    font: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+#print-receipt:hover {
+    background-color: var(--brown);
+}
 @media (prefers-reduced-motion: reduce) {
     .cart-item.removing {
         animation: none;
@@ -621,5 +782,40 @@ footer p {
     }
     .cart-item-image {
         width: 100%;
+    }
+    .order-progress {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .order-progress li {
+        padding: 0 0 0 2rem;
+        text-align: left;
+    }
+    .order-progress li::before {
+        top: 0.2rem;
+        left: 0;
+        transform: none;
+    }
+    .order-progress li::after {
+        display: none;
+    }
+}
+
+@media print {
+    header, footer, .menu-intro, .status-card, .demo-notice, .confirmation-actions {
+        display: none;
+    }
+    body {
+        background-color: white;
+    }
+    .confirmation-section {
+        max-width: none;
+        padding: 0;
+    }
+    #confirmation-content {
+        padding: 0;
+        background-color: white;
+        border: 0;
+        box-shadow: none;
     }
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset 73 Burger | Order Confirmation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header>
+        <a href="index.html" aria-label="Sunset 73 Burger home"><img src="images/sunset-73-logo.png" class="logo"
+                alt="Sunset 73 Burger logo"></a>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order (<span class="cart-count">0</span>)</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        <section class="menu-intro">
+            <h1>Order's In!</h1>
+            <p>The griddle is hot and the Sunset 73 crew is on it.</p>
+        </section>
+
+        <section class="confirmation-section" aria-label="Order confirmation">
+            <div id="missing-confirmation" class="confirmation-message" hidden>
+                <h2 id="confirmation-heading">No Recent Order</h2>
+                <p>We couldn't find an order to display. Build a fresh one from our menu.</p>
+                <a href="menu.html" class="button">Explore the Menu</a>
+            </div>
+
+            <div id="confirmation-content" hidden>
+                <div class="confirmation-header">
+                    <p class="confirmation-kicker">Order confirmed</p>
+                    <h2 id="customer-thanks">Thanks!</h2>
+                    <p>Order <strong id="confirmation-number"></strong></p>
+                </div>
+
+                <div class="pickup-window">
+                    <p>Estimated pickup window</p>
+                    <strong id="confirmation-pickup"></strong>
+                    <span>Pay when you arrive.</span>
+                </div>
+
+                <section class="status-card" aria-labelledby="status-heading">
+                    <h3 id="status-heading">Order Status</h3>
+                    <ol class="order-progress">
+                        <li class="current" aria-current="step">
+                            <strong>Order Received</strong>
+                            <span id="order-received-time"></span>
+                        </li>
+                        <li>
+                            <strong>On the Griddle</strong>
+                            <span>Coming up next</span>
+                        </li>
+                        <li>
+                            <strong>Ready for Pickup</strong>
+                            <span>We'll have it hot and ready</span>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="receipt" aria-labelledby="receipt-heading">
+                    <h3 id="receipt-heading">Your Receipt</h3>
+                    <div id="confirmation-items"></div>
+                    <div class="receipt-totals">
+                        <p><span>Subtotal</span><strong id="confirmation-subtotal"></strong></p>
+                        <p><span>Tax (8%)</span><strong id="confirmation-tax"></strong></p>
+                        <p class="receipt-total"><span>Total</span><strong id="confirmation-total"></strong></p>
+                    </div>
+                    <div id="confirmation-instructions" class="receipt-instructions" hidden>
+                        <h4>Special Instructions</h4>
+                        <p id="confirmation-instructions-text"></p>
+                    </div>
+                </section>
+
+                <p class="demo-notice"><strong>Demo order:</strong> This confirms the website experience only. No real restaurant order or payment was created.</p>
+
+                <div class="confirmation-actions">
+                    <button id="print-receipt" type="button">Print Receipt</button>
+                    <a href="menu.html" class="button">Start a New Order</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Sunset 73 Burger. A great, but fictional restaurant.</p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
