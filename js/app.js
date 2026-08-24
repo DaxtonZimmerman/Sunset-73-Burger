@@ -7,7 +7,18 @@ const cartItemsContainer = document.querySelector("#cart-items");
 const subtotalAmount = document.querySelector("#subtotal-amount");
 const taxAmount = document.querySelector("#tax-amount");
 const totalAmount = document.querySelector("#total-amount");
+const clearOrderButton = document.querySelector("#clear-order");
+const pickupEstimate = document.querySelector("#pickup-estimate");
+const placeOrderButton = document.querySelector(".checkout-button");
+const largeOrderContact = document.querySelector("#large-order-contact");
+const contactForm = document.querySelector("#contact-form");
+const contactStatus = document.querySelector("#contact-status");
+const contactSubmitButton = document.querySelector(".contact-submit");
+const requestType = document.querySelector("#request-type");
+const estimatedItems = document.querySelector("#estimated-items");
 const taxRate = 0.08;
+const maximumOnlineItems = 30;
+const contactFormUrl = "https://script.google.com/macros/s/AKfycbwMGtCymZB9yTae2guQKCMkbVYCydL0Zt5Y8iWnoJ3uyguSkQrP2kJvlADUSWlFE_0g6A/exec";
 const removalDelay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 350;
 const menuImages = {
     "Sunset Smash": "images/sunset-smash.png",
@@ -36,6 +47,43 @@ function saveCart() {
     updateCartCount();
     displayCartItems();
     updateOrderTotals();
+    updatePickupEstimate();
+}
+
+function updatePickupEstimate() {
+    if (pickupEstimate === null) {
+        return;
+    }
+
+    let itemCount = 0;
+
+    cart.forEach(function (item) {
+        itemCount += item.quantity;
+    });
+
+    if (itemCount === 0) {
+        pickupEstimate.textContent = "Add items to your order to receive a pickup estimate.";
+        pickupEstimate.parentElement.classList.remove("large-order");
+        largeOrderContact.hidden = true;
+        placeOrderButton.disabled = true;
+        return;
+    }
+
+    if (itemCount > maximumOnlineItems) {
+        pickupEstimate.textContent = `Large order detected: online checkout is limited to ${maximumOnlineItems} items. Send us a large-order request for a custom pickup time.`;
+        pickupEstimate.parentElement.classList.add("large-order");
+        largeOrderContact.href = `contact.html?type=large-order&items=${itemCount}`;
+        largeOrderContact.hidden = false;
+        placeOrderButton.disabled = true;
+        return;
+    }
+
+    pickupEstimate.parentElement.classList.remove("large-order");
+    largeOrderContact.hidden = true;
+    placeOrderButton.disabled = false;
+    const minimumMinutes = 20 + Math.max(0, itemCount - 1) * 2;
+    const maximumMinutes = minimumMinutes + 10;
+    pickupEstimate.textContent = `${minimumMinutes}–${maximumMinutes} minutes after placing your order`;
 }
 
 function updateOrderTotals() {
@@ -145,6 +193,7 @@ function displayCartItems() {
 updateCartCount();
 displayCartItems();
 updateOrderTotals();
+updatePickupEstimate();
 
 filterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -188,3 +237,47 @@ addToOrderButtons.forEach(function (addButton) {
         saveCart();
     });
 });
+
+if (clearOrderButton !== null) {
+    clearOrderButton.addEventListener("click", function () {
+        cart.length = 0;
+        saveCart();
+    });
+}
+
+if (contactForm !== null) {
+    const pageParameters = new URLSearchParams(window.location.search);
+
+    if (pageParameters.get("type") === "large-order") {
+        requestType.value = "Large Order";
+    }
+
+    if (pageParameters.has("items")) {
+        estimatedItems.value = pageParameters.get("items");
+    }
+
+    contactForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        contactSubmitButton.disabled = true;
+        contactForm.setAttribute("aria-busy", "true");
+        contactStatus.textContent = "Sending your request...";
+
+        try {
+            const formData = new FormData(contactForm);
+
+            await fetch(contactFormUrl, {
+                method: "POST",
+                body: formData,
+                mode: "no-cors"
+            });
+
+            contactForm.reset();
+            contactStatus.textContent = "Far out! Your request was sent to the Sunset 73 crew.";
+        } catch (error) {
+            contactStatus.textContent = "We couldn't send your request. Check your connection and try again.";
+        } finally {
+            contactSubmitButton.disabled = false;
+            contactForm.removeAttribute("aria-busy");
+        }
+    });
+}

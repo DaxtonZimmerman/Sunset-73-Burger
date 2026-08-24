@@ -20,6 +20,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="order.html" aria-current="page">Order (<span class="cart-count">0</span>)</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -41,7 +42,11 @@
                 <p><span>Tax (8%)</span><strong id="tax-amount">$0.00</strong></p>
                 <p class="grand-total"><span>Total</span><strong id="total-amount">$0.00</strong></p>
             </aside>
-            <a href="menu.html" class="button">Back to Menu</a>
+            <div class="order-actions">
+                <a href="menu.html" class="button">Back to Menu</a>
+                <button id="clear-order" type="button">Clear Order</button>
+                <a href="checkout.html" class="button">Continue to Checkout</a>
+            </div>
         </section>
     </main>
 

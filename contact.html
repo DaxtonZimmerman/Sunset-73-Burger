@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset 73 Burger | Contact Us</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header>
+        <a href="index.html" aria-label="Sunset 73 Burger home"><img src="images/sunset-73-logo.png" class="logo"
+                alt="Sunset 73 Burger logo"></a>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order (<span class="cart-count">0</span>)</a></li>
+                <li><a href="contact.html" aria-current="page">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        <section class="menu-intro">
+            <h1>Give Us a Ring</h1>
+            <p>Questions, feedback, or a seriously big burger order? Send a note to the Sunset 73 crew.</p>
+        </section>
+
+        <section class="contact-section" aria-labelledby="contact-heading">
+            <div class="contact-details">
+                <h2 id="contact-heading">Contact Sunset 73</h2>
+                <p>Use this form for general questions, feedback, and orders larger than 30 items.</p>
+                <p><strong>Demo diner:</strong> Submissions are saved to the restaurant owner's private spreadsheet. Do not include passwords, payment details, or other sensitive information.</p>
+            </div>
+
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">Your name</label>
+                    <input type="text" id="contact-name" name="name" autocomplete="name" maxlength="50" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-method">Email or phone number</label>
+                    <input type="text" id="contact-method" name="contact" autocomplete="email" maxlength="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="request-type">What can we help with?</label>
+                    <select id="request-type" name="requestType" required>
+                        <option value="">Choose a request type</option>
+                        <option value="General Question">General question</option>
+                        <option value="Large Order">Large order</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Event or Catering">Event or catering</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="estimated-items">Estimated number of items <span>(optional)</span></label>
+                    <input type="number" id="estimated-items" name="estimatedItems" min="1" max="300" inputmode="numeric">
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-date">Preferred pickup date <span>(optional)</span></label>
+                    <input type="date" id="pickup-date" name="pickupDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact-message">Tell us what you need</label>
+                    <textarea id="contact-message" name="message" rows="6" maxlength="1000" required></textarea>
+                </div>
+
+                <button class="contact-submit" type="submit">Send Request</button>
+                <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Sunset 73 Burger. A great, but fictional restaurant.</p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

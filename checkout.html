@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset 73 Burger | Pickup Checkout</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header>
+        <a href="index.html" aria-label="Sunset 73 Burger home"><img src="images/sunset-73-logo.png" class="logo"
+                alt="Sunset 73 Burger logo"></a>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="order.html">Order (<span class="cart-count">0</span>)</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        <section class="menu-intro">
+            <h1>Pickup Checkout</h1>
+            <p>Tell us when to have your Sunset 73 favorites hot and ready.</p>
+        </section>
+
+        <section class="checkout-section" aria-labelledby="checkout-heading">
+            <h2 id="checkout-heading">Pickup Details</h2>
+            <p class="demo-notice"><strong>Demo checkout:</strong> This fictional restaurant does not collect real payments or personal data.</p>
+
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="pickup-name">Pickup name</label>
+                    <input type="text" id="pickup-name" name="pickup-name" autocomplete="name" maxlength="50" required>
+                </div>
+
+                <div class="pickup-estimate" role="status">
+                    <h3>Estimated Pickup Time</h3>
+                    <p id="pickup-estimate">Calculating from your order...</p>
+                    <a id="large-order-contact" class="button" href="contact.html?type=large-order" hidden>Request a Large Order</a>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-instructions">Special instructions <span>(optional)</span></label>
+                    <textarea id="special-instructions" name="special-instructions" rows="4" maxlength="200"></textarea>
+                </div>
+
+                <section class="payment-card" aria-labelledby="payment-heading">
+                    <h3 id="payment-heading" class="payment-card-heading">Payment Method</h3>
+                    <div class="payment-details">
+                        <span class="payment-icon" aria-hidden="true">$</span>
+                        <div>
+                            <p class="payment-name"><strong>Pay at Pickup</strong></p>
+                            <p>Bring cash or a card when you collect your order. No payment information is collected online.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="checkout-actions">
+                    <button class="checkout-button" type="submit">Place Order</button>
+                    <a href="order.html" class="button">Back to Order</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Sunset 73 Burger. A great, but fictional restaurant.</p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
